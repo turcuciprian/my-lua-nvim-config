@@ -1,5 +1,3 @@
-# Install coc server
+# my personal nVim config based on lua and inspired mostly by the theprimagen install
 
-inside nvim, after you installed the plugin:
-```:CocInstall coc-json coc-tsserver```
-
+the set's are custom
