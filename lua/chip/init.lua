@@ -1,2 +1,2 @@
-require("lua.chip.remap")
-require("lua.chip.set")
+require("chip.remap")
+require("chip.set")
