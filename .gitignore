@@ -1,0 +1,13 @@
+__pycache__
+.DS_Store
+local_env*
+models/
+*.pt
+*.jpg
+*.png
+*.jpeg
+*.mov
+*.mpeg
+*.avi
+*.mp4
+*secret_key
