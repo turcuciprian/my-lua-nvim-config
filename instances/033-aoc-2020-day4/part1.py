@@ -36,6 +36,4 @@ for passport in passports:
         if cond2 and not cond3:
             valid_passports+=1
 # Step 8: count valid passports and return the result
-
-
-breakpoint()
+print('total valid passports:', valid_passports)
