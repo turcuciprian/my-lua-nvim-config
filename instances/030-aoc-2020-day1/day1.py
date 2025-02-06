@@ -3,7 +3,7 @@ import numpy as np
 input = np.array(
     [
         1593,
-        1575,
+        # 1575,
         1583,
         1609,
         1835,
