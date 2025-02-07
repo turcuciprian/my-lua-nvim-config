@@ -2,7 +2,7 @@ import numpy as np
 import math
 
 # Part 1
-input = open("./aoc-inputs/aoc-2020-day3-input.txt", "r").read()
+input = open("inputs/day3.txt", "r").read()
 input_arr = np.array(input.split("\n")).astype("str")[:-1]
 
 
@@ -23,12 +23,5 @@ def count_trees(slope_arr, right, down=1):
     return trees
 
 
-# Part 2
-
-cases = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
-result = 1
-for case in cases:
-    trees = count_trees(input_arr, right=case[0], down=case[1])
-    result *= trees
-    print(f"number of trees captured for {case[0]}x>{case[1]}v:", trees)
-print("day 3 part 2 result:", result)
+trees = count_trees(input_arr, right=3)
+print("number of trees captured for 3x>1v:", trees)

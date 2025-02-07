@@ -14,9 +14,9 @@ def seat_id(boarding_pass):
     return int(row * 8 + col)
 
 
-input = open("./aoc-inputs/aoc-2020-day5-input.txt", "r").read().split("\n")[:-1]
+input = open("inputs/day5.txt", "r").read().split("\n")[:-1]
 seats = [seat_id(bpass) for bpass in input]
 # seats.sort()
 part2_seats = [seat - 1 for seat in sorted(seats)[1:-1] if seat - 1 not in seats]
 my_seat_id = part2_seats[0]
-print("Your seat ID", seats[my_seat_id])
+print("Your seat ID", my_seat_id)

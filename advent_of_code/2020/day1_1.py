@@ -1,4 +1,4 @@
-input = open("./aoc-inputs/aoc-2020-day1-input.txt", "r").read().split("\n")
+input = open("./inputs/day1.txt", "r").read().split("\n")
 
 for index in range(len(input)):
     current_number = int(input[index])

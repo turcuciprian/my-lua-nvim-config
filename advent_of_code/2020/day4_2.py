@@ -53,7 +53,7 @@ def validate_key(keyValue):
 
 
 
-input = open("./aoc-inputs/aoc-2020-day4-input.txt", "r").read()
+input = open("inputs/day4.txt", "r").read()
 # Step 1: split text into array of passports
 passports_raw = input.split("\n\n")
 

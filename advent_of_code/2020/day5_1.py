@@ -15,6 +15,6 @@ def seat_id(boarding_pass):
     return row * 8 + col
 
 
-input = open("./aoc-inputs/aoc-2020-day5-input.txt", "r").read().split("\n")[:-1]
+input = open("inputs/day5.txt", "r").read().split("\n")[:-1]
 seats = [seat_id(bpass) for bpass in input]
 print("hightest seat $ is:", max(seats))

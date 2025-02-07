@@ -2,7 +2,7 @@ import numpy as np
 from itertools import combinations
 import time
 
-input = open("./aoc-inputs/aoc-2020-day1-input.txt", "r").read().split("\n")
+input = open("inputs/day1.txt", "r").read().split("\n")
 input_list = [int(nr) for nr in input]
 
 # itertools version:
