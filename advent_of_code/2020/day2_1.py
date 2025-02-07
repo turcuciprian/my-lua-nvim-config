@@ -6,7 +6,6 @@ def pharse_columns(keys_list):
 
 input = open("inputs/day2.txt", "r").read().split("\n")
 input_arr = [pharse_columns(row.split(" ")) for row in input]
-# 9-10 x: pxcbpxxwkqjttx
 # task 1
 number_of_good_passwords = 0
 for item in input_arr:
