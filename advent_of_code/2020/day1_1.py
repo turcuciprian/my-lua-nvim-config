@@ -1,11 +1,15 @@
-input = open("./inputs/day1.txt", "r").read().split("\n")
+import numpy as np
+from itertools import combinations
 
-for index in range(len(input)):
-    current_number = int(input[index])
-    for summed_nr in input[index:]:
-        sum = int(summed_nr) + int(current_number)
-        if sum == 2020:
-            print(current_number, summed_nr)
-            print(int(current_number) * int(summed_nr))
-            break
+input = open("./inputs/day1.txt", "r").read().split("\n")
+input_list = [int(nr) for nr in input]
+
+comb_list = list(combinations(input_list, 2))
+mask = np.sum(comb_list, axis=1)
+index = [True if item == 2020 else False for item in mask].index(True)
+a, b = comb_list[index]
+val_match = sum(comb_list[index])
+print("sum: ", val_match)
+print("result: ", a * b )
+
 print("done")
