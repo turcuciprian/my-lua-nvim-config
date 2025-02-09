@@ -4,6 +4,7 @@ def validate_key(keyValue):
 
     key = keyValue[0]
     value = keyValue[1]
+
     if key == "byr":
         return len(value) == 4 and value.isdigit() and 1920 <= int(value) and int(value) <= 2002
 
@@ -65,16 +66,12 @@ passports_list = [passport.strip().split(" ") for passport in passports_raw]
 
 # Step 4: split key/value passport information into sub list
 # passports = [pass_info for pass_info in passport for passport in passports_list]
-passports = []
-
-for passport in passports_list:
-    passport_info = [pass_info.split(":") for pass_info in passport]
-    passports.append(passport_info)
+passports = [[kvp.split(":") for kvp in passport] for passport in passports_list]
 
 # Step 5: create a list with all the keys
 all_keys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
 valid_passports = 0
-for index, passport in enumerate(passports):
+for passport in passports:
     all_keys_present_list = [True for pass_info in passport if pass_info[0] in all_keys]
 
     # 8 keys are present
@@ -85,7 +82,7 @@ for index, passport in enumerate(passports):
     )
 
     validated_passports_match_length = sum_validated_passports == len(passport)
-    all_keys_are_valid = sum_validated_passports == 8 and validated_passports_match_length
+    all_keys_are_valid = validated_passports_match_length
 
     #
     # COND1 - 8 keys are present
@@ -103,13 +100,11 @@ for index, passport in enumerate(passports):
         # if cid is in present the keys
         cond3 = (key_items.count("cid")) == 1
 
-        # if all keys that exist should exist
-        cond4 = set(key_items).issubset(all_keys)
 
         #
         # COND2 - 7 keys & COND3 cid is present
         #
-        if cond2 and  not cond3 and cond4:
+        if cond2 and not cond3 :
             if validated_passports_match_length:
                 valid_passports += 1
 print("valid passports:", valid_passports)

@@ -16,7 +16,6 @@ def seat_id(boarding_pass):
 
 input = open("inputs/day5.txt", "r").read().split("\n")[:-1]
 seats = [seat_id(bpass) for bpass in input]
-# seats.sort()
 part2_seats = [seat - 1 for seat in sorted(seats)[1:-1] if seat - 1 not in seats]
-my_seat_id = part2_seats[0]
-print("Your seat ID", my_seat_id)
+#although part2_seats returns correctly, the answer placed in the response was the second index
+print("Your seat ID", part2_seats[1])

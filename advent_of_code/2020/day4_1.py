@@ -9,11 +9,8 @@ passports_raw = [passport.replace("\n", " ") for passport in passports_raw]
 passports_list = [passport.split(" ") for passport in passports_raw]
 
 # Step 4: split key/value passport information into sub list
-# passports = [pass_info for pass_info in passport for passport in passports_list]
-passports = []
-for passport in passports_list:
-    passwords_info = [pass_info.split(":") for pass_info in passport]
-    passports.append(passwords_info)
+# kvp = key value pair
+passports = [[kvp.split(":") for kvp in passport] for passport in passports_list]
 
 # Step 5: create a list with all the keys
 all_keys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
@@ -22,17 +19,20 @@ valid_passports = 0
 for passport in passports:
     all_keys_present_list = [pass_info[0] in all_keys for pass_info in passport]
 
+    nr_of_keys = sum(1 for key_exists in all_keys_present_list if key_exists)
+
     # 8 keys are present
-    cond1 = sum(1 for key_exists in all_keys_present_list if key_exists) > 7
+    cond1 =  nr_of_keys > 7
 
     if cond1:
         valid_passports += 1
     else:
         # less than 8 keys are present
         # Step 7: if Step 6 is not true, check if there are 7 keys present and if cid is present - passport invalid if not and valid if yes
-        cond2 = sum(1 for key_exists in all_keys_present_list if key_exists) == 7
+        cond2 = nr_of_keys == 7
         # if cid is in present the keys
         cond3 = "cid" in [key_value[0] for key_value in passport]
+
         if cond2 and not cond3:
             valid_passports += 1
 # Step 8: count valid passports and return the result
