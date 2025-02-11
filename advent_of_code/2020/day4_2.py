@@ -104,7 +104,6 @@ for passport in passports:
         #
         # COND2 - 7 keys & COND3 cid is present
         #
-        if cond2 and not cond3 :
-            if validated_passports_match_length:
-                valid_passports += 1
+        if cond2 and not cond3 and validated_passports_match_length :
+            valid_passports += 1
 print("valid passports:", valid_passports)
