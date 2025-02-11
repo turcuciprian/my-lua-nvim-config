@@ -10,6 +10,6 @@ index = [True if item == 2020 else False for item in mask].index(True)
 a, b = comb_list[index]
 val_match = sum(comb_list[index])
 print("sum: ", val_match)
-print("result: ", a * b )
+print("result: ", a * b)
 
 print("done")

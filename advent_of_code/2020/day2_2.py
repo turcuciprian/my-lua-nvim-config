@@ -13,8 +13,12 @@ for item in input_arr:
     char = item[1]
     all_chars = list(item[2])
 
-    condition1 = all_chars[(A - 1)] == char and all_chars[B - 1] != char # first char matches, char 2'nd doesn't
-    condition2 = all_chars[A - 1] != char and all_chars[B - 1] == char # first char doesn't match, 2'nd char does
+    condition1 = (
+        all_chars[(A - 1)] == char and all_chars[B - 1] != char
+    )  # first char matches, char 2'nd doesn't
+    condition2 = (
+        all_chars[A - 1] != char and all_chars[B - 1] == char
+    )  # first char doesn't match, 2'nd char does
 
     if condition1 or condition2:
         number_of_good_passwords += 1

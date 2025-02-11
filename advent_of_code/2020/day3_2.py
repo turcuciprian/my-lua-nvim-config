@@ -27,4 +27,4 @@ for case in cases:
     result *= trees_hit
     print(f"number of trees captured for {case[0]}r>{case[1]}d:", trees_hit)
 print("day 3 part 2 result:", result)
-inputs/day3.txt
+inputs / day3.txt

@@ -6,13 +6,28 @@ def validate_key(keyValue):
     value = keyValue[1]
 
     if key == "byr":
-        return len(value) == 4 and value.isdigit() and 1920 <= int(value) and int(value) <= 2002
+        return (
+            len(value) == 4
+            and value.isdigit()
+            and 1920 <= int(value)
+            and int(value) <= 2002
+        )
 
     if key == "iyr":
-        return len(value) == 4 and value.isdigit() and 2010 <= int(value) and int(value) <= 2020
+        return (
+            len(value) == 4
+            and value.isdigit()
+            and 2010 <= int(value)
+            and int(value) <= 2020
+        )
 
     if key == "eyr":
-        return len(value) == 4 and value.isdigit() and 2020 <= int(value) and int(value) <= 2030
+        return (
+            len(value) == 4
+            and value.isdigit()
+            and 2020 <= int(value)
+            and int(value) <= 2030
+        )
 
     if key == "hgt":
         hgt_cond = False
@@ -53,7 +68,6 @@ def validate_key(keyValue):
         return True
 
 
-
 input = open("inputs/day4.txt", "r").read()
 # Step 1: split text into array of passports
 passports_raw = input.split("\n\n")
@@ -75,7 +89,7 @@ for passport in passports:
     all_keys_present_list = [True for pass_info in passport if pass_info[0] in all_keys]
 
     # 8 keys are present
-    cond1 = len(all_keys_present_list)==8
+    cond1 = len(all_keys_present_list) == 8
 
     sum_validated_passports = sum(
         [1 for key_value in passport if validate_key(key_value)]
@@ -100,10 +114,9 @@ for passport in passports:
         # if cid is in present the keys
         cond3 = (key_items.count("cid")) == 1
 
-
         #
         # COND2 - 7 keys & COND3 cid is present
         #
-        if cond2 and not cond3 and validated_passports_match_length :
+        if cond2 and not cond3 and validated_passports_match_length:
             valid_passports += 1
 print("valid passports:", valid_passports)

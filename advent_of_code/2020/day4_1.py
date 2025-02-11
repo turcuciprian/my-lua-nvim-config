@@ -22,7 +22,7 @@ for passport in passports:
     nr_of_keys = sum(1 for key_exists in all_keys_present_list if key_exists)
 
     # 8 keys are present
-    cond1 =  nr_of_keys > 7
+    cond1 = nr_of_keys > 7
 
     if cond1:
         valid_passports += 1
