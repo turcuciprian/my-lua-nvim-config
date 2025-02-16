@@ -1,83 +1,42 @@
-import numpy as np
-from typing import Any
-from numpy.typing import NDArray
-from typing import List
+import re
+import time
 
-data = open("inputs/day7.txt", "r").read().split("\n")[:-1]
-data_list = [item.split("bags contain") for item in data]
-rows = [{item[0]: item[1].split(",")} for item in data_list]
-ROWS_FORMATTED = np.array(
-    [
-        [
-            {
-                key.strip(): [
-                    (
-                        bag.replace("bags.", "")
-                        .replace("bags", "")
-                        .replace("bag.", "")
-                        .replace("bag", "")
-                        .strip()
-                        .split(" ", 1)[1]
-                    )
-                    for bag in value
-                ]
-            }
-            for key, value in row.items()
-        ]
-        for row in rows
-    ],
-    dtype=object,
-)
-ROWS_FORMATTED = np.array([item[0] for item in ROWS_FORMATTED])
-ROWS_FORMATTED = np.array(
-    [
-        item
-        for item in ROWS_FORMATTED
-        if not (
-            isinstance(item, dict)
-            and len(item) == 1
-            and list(item.values())[0] == ["other"]
-        )
-    ]
-)
+# Read and parse input
+with open("inputs/day7.txt", "r") as f:
+    data = f.read().strip().split("\n")
 
+# Precompile regex for bag cleaning
+BAG_CLEANER = re.compile(r"\s*bags?\.?\s*")
 
-def get_values_by_key(all_rows: NDArray[Any], bag_name: str):
-    for item in all_rows:
-        row_key = list(item.keys())[0]
-
-        if bag_name == row_key:
-            print(bag_name)
-            return item[row_key]
-    return []
-
-
-def check_children(all_rows: NDArray[Any], my_bag: str, current_bags: list[str]):
-    results = []
-    if my_bag in current_bags:
-        return True
+# Parse the input into a dictionary for fast lookups
+bag_rules = {}
+for line in data:
+    outer_bag, inner_bags = line.split(" bags contain ")
+    if "no other bags" in inner_bags:
+        bag_rules[outer_bag] = []
     else:
-        if len(current_bags) == 0:
-            return False
-        else:
-            for item in current_bags:
-                current_bags = get_values_by_key(all_rows=all_rows, bag_name=item)
-                result = check_children(
-                    all_rows=all_rows,
-                    my_bag=my_bag,
-                    current_bags=current_bags,
-                )
-                results.append(result)
-    return any(results)
+        bag_rules[outer_bag] = [
+            BAG_CLEANER.sub("", bag.strip()).split(" ", 1)[1]
+            for bag in inner_bags.split(", ")
+        ]
 
 
-result_list = []
-for item in ROWS_FORMATTED:
-    for _, values in item.items():
-        result = check_children(
-            all_rows=ROWS_FORMATTED, my_bag="shiny gold", current_bags=values
-        )
-        result_list.append(result)
-# cycle trough all the rows of our list
+# Recursive function to check if a bag contains "shiny gold"
+def contains_shiny_gold(bag):
+    return "shiny gold" in bag_rules[bag] or any(
+        contains_shiny_gold(inner) for inner in bag_rules[bag]
+    )
 
-print(sum(result_list))
+
+# Timing the execution
+print("Calculating...")
+start_time = time.perf_counter()
+
+# Count how many bags can contain "shiny gold"
+result = sum(contains_shiny_gold(bag) for bag in bag_rules)
+
+# Print results
+end_time = time.perf_counter()
+elapsed = end_time - start_time
+print(f"Result: {result}")
+print(f"Took: {elapsed:.5f} seconds")
