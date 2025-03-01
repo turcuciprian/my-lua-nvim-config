@@ -2,6 +2,7 @@ import numpy as np
 from itertools import combinations
 import time
 
+invalid_number = 144381670
 input = open("inputs/day1.txt", "r").read().split("\n")
 input_list = [int(nr) for nr in input]
 
