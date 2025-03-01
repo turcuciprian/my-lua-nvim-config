@@ -15,9 +15,8 @@ for index in range(2,len(data)):
     custom_contiguous_combinations = [data[i:i+index] for i in range(len(data))]
     mask = np.sum(custom_contiguous_combinations[:-index+1], axis=1)
     if invalid_number in mask:
-        print(index)
-        indexnr = list(mask).index(invalid_number)
-        comb = custom_contiguous_combinations[indexnr]
+        index_nr = list(mask).index(invalid_number)
+        comb = custom_contiguous_combinations[index_nr]
         result = min(comb) + max(comb)
         print(f"result: {result}")
         break
