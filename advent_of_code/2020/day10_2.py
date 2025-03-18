@@ -13,3 +13,4 @@ ones = int(np.sum(jolt_differences == 1))
 threes = int(np.sum(jolt_differences == 3))
 print(f"result: {ones * threes}")
 print(f"Lasted: {time.time()-star_time:0.5f} seconds")
+
